@@ -11,8 +11,10 @@ class TaskList extends StatelessWidget {
         return ListView.builder(
           itemBuilder: (context, index) {
             return TaskListTile(
-              task: taskdatainstance.getTasks()[index].TaskContent,
-              myval: taskdatainstance.getTasks()[index].isdone,
+              // task: taskdatainstance.getTasks()[index].TaskContent,
+              task:
+                  Provider.of<TaskData>(context).getTasks()[index].TaskContent,
+              myval: Provider.of<TaskData>(context).getTasks()[index].isdone,
               onChangedFunction: () {
                 taskdatainstance.toggleDone(taskdatainstance.getTasks()[index]);
               },

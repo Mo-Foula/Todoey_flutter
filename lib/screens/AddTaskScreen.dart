@@ -56,6 +56,10 @@ class AddTaskScreen extends StatelessWidget {
               onPressed: () {
                 if (myTask != "")
                   Provider.of<TaskData>(context).addTask(myTask);
+                else
+                  print(
+                      'tasks number ${Provider.of<TaskData>(context).getTasks().length}');
+                myTask = "";
                 texteditingcontroller.clear();
               },
             ),
