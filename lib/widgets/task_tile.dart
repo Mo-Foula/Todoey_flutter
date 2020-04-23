@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:todoey_flutter/classes/task_data.dart';
 
 class TaskListTile extends StatelessWidget {
   final String task;

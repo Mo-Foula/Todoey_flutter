@@ -56,11 +56,24 @@ class TaskScreen extends StatelessWidget {
                         fontSize: 40,
                         fontWeight: FontWeight.w700),
                   ),
-                  Text(
-                    Provider.of<TaskData>(context, listen: true)
-                        .getNumberTasks()
-                        .toString(),
-                    style: TextStyle(color: Colors.white, fontSize: 18),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        Provider.of<TaskData>(context, listen: true)
+                            .getNumberTasks()
+                            .toString(),
+                        style: TextStyle(color: Colors.white, fontSize: 18),
+                      ),
+                      FlatButton(
+                        onPressed: () async {
+                          await TaskData().loadData();
+                          Provider.of<TaskData>(context).update();
+                        },
+                        child: Text('Load data'),
+                        color: Colors.blueGrey,
+                      )
+                    ],
                   ),
                 ],
               ),

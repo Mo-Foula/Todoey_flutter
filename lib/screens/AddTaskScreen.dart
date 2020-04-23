@@ -6,7 +6,7 @@ class AddTaskScreen extends StatelessWidget {
   String myTask = "";
   void onAddFunction(String tsk) {}
 
-  TextEditingController texteditingcontroller = TextEditingController();
+  final TextEditingController texteditingcontroller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +55,7 @@ class AddTaskScreen extends StatelessWidget {
               color: Colors.lightBlueAccent,
               onPressed: () {
                 if (myTask != "")
-                  Provider.of<TaskData>(context).addTask(myTask);
+                  Provider.of<TaskData>(context).addTask(myTask, false);
                 else
                   print(
                       'tasks number ${Provider.of<TaskData>(context).getTasks().length}');

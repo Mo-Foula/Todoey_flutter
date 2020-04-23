@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 
 class Task {
-  final String TaskContent;
+  final String taskContent;
 
   bool isdone = false;
-  Task({@required this.TaskContent, this.isdone});
+  Task({@required this.taskContent, this.isdone});
 
-  void ToggleDone() {
+  void toggleDone() {
     isdone = !isdone;
   }
 }
