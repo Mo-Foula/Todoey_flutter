@@ -37,8 +37,15 @@ class TaskData extends ChangeNotifier {
     }
   }
 
-  bool getOpenedBefore() =>
-      _prefs.getBool('opened_before') != null ? true : false;
+  Future<bool> getOpenedBefore() async {
+    _prefs = await SharedPreferences.getInstance();
+    return _prefs.getBool('opened_before') != null;
+  }
+
+  void setOpenedBefore() async {
+    _prefs = await SharedPreferences.getInstance();
+    _prefs.setBool('opened_before', true);
+  }
 
   void saveData() async {
     changeSavingState();

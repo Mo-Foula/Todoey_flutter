@@ -28,6 +28,11 @@ class _TaskScreenState extends State<TaskScreen> {
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
+                Text(
+                    '• Todoey is a to do list app that helps you managing your tasks.'),
+                SizedBox(
+                  height: 10,
+                ),
                 Text('• You can add your tasks using the + button.'),
                 SizedBox(
                   height: 10,
@@ -62,9 +67,13 @@ class _TaskScreenState extends State<TaskScreen> {
   void loadPrevData() async {
     await TaskData().loadData();
     Provider.of<TaskData>(context).update();
-    // if (Provider.of<TaskData>(context).getOpenedBefore()) {
-    //   firstTimeDialog();
-    // }
+
+    bool a = await Provider.of<TaskData>(context).getOpenedBefore();
+    //  print('MY ANSWER IS ${a}');
+    if (!a) {
+      _neverSatisfied();
+      Provider.of<TaskData>(context).setOpenedBefore();
+    }
   }
 
   @override
