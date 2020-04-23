@@ -69,7 +69,8 @@ class _TaskScreenState extends State<TaskScreen> {
     Provider.of<TaskData>(context).update();
 
     bool a = await Provider.of<TaskData>(context).getOpenedBefore();
-    //  print('MY ANSWER IS ${a}');
+
+    ///**/ */  print('MY ANSWER IS ${a}');
     if (!a) {
       _neverSatisfied();
       Provider.of<TaskData>(context).setOpenedBefore();
