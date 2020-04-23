@@ -37,13 +37,16 @@ class TaskData extends ChangeNotifier {
     }
   }
 
+  bool getOpenedBefore() =>
+      _prefs.getBool('opened_before') != null ? true : false;
+
   void saveData() async {
     changeSavingState();
     notifyListeners();
     _prefs = await SharedPreferences.getInstance();
     _prefs.clear();
     _prefs.setInt('number', _tasksdata.length);
-
+    _prefs.setBool('opened_before', true);
     for (int i = 0; i < _tasksdata.length; i++) {
       _prefs.setBool('boolean $i', _tasksdata[i].isdone);
       _prefs.setString('task $i', _tasksdata[i].taskContent);

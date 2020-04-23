@@ -7,7 +7,73 @@ import 'package:loading_overlay/loading_overlay.dart';
 
 //TaskData().loadData();
 
-class TaskScreen extends StatelessWidget {
+class TaskScreen extends StatefulWidget {
+  @override
+  _TaskScreenState createState() => _TaskScreenState();
+}
+
+class _TaskScreenState extends State<TaskScreen> {
+  Future<void> _neverSatisfied() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: true, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: ContinuousRectangleBorder(
+              borderRadius: BorderRadius.circular(20)),
+          title: Text(
+            'Instructions:',
+            style: TextStyle(color: Colors.lightBlueAccent),
+          ),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('• You can add your tasks using the + button.'),
+                SizedBox(
+                  height: 10,
+                ),
+                Text('• You can mark done tasks by pressing on them.'),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                    '• You can delete a task by pressing on it for 2 seconds.'),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                    '• Tasks added before will be loaded upon opening the app again.'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Close'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void loadPrevData() async {
+    await TaskData().loadData();
+    Provider.of<TaskData>(context).update();
+    // if (Provider.of<TaskData>(context).getOpenedBefore()) {
+    //   firstTimeDialog();
+    // }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loadPrevData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,14 +103,30 @@ class TaskScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  CircleAvatar(
-                    child: Icon(
-                      Icons.list,
-                      size: 30,
-                      color: Colors.lightBlueAccent,
-                    ),
-                    backgroundColor: Colors.white,
-                    radius: 30,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      CircleAvatar(
+                        child: Icon(
+                          Icons.list,
+                          size: 30,
+                          color: Colors.lightBlueAccent,
+                        ),
+                        backgroundColor: Colors.white,
+                        radius: 30,
+                      ),
+                      FlatButton(
+                          // color: Colors.white,
+                          onPressed: () {
+                            // firstTimeDialog();
+                            _neverSatisfied();
+                          },
+                          child: Icon(
+                            Icons.info,
+                            color: Colors.white,
+                            size: 50,
+                          )),
+                    ],
                   ),
                   SizedBox(
                     height: 10,
@@ -65,14 +147,21 @@ class TaskScreen extends StatelessWidget {
                             .toString(),
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
-                      FlatButton(
-                        onPressed: () async {
-                          await TaskData().loadData();
-                          Provider.of<TaskData>(context).update();
-                        },
-                        child: Text('Load data'),
-                        color: Colors.blueGrey,
-                      )
+                      // FlatButton(
+                      //   onPressed: () async {
+                      //     await TaskData().loadData();
+                      //     Provider.of<TaskData>(context).update();
+                      //   },
+                      //   child: Text(
+                      //     'Load data',
+                      //     style: TextStyle(
+                      //       fontSize: 17,
+                      //       color: Colors.lightBlueAccent,
+                      //       fontWeight: FontWeight.w700,
+                      //     ),
+                      //   ),
+                      //   color: Colors.white,
+                      // )
                     ],
                   ),
                 ],
