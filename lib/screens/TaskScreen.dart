@@ -91,6 +91,7 @@ class _TaskScreenState extends State<TaskScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showModalBottomSheet(
+            isScrollControlled: true,
             context: context,
             builder: (context) => AddTaskScreen(),
           );

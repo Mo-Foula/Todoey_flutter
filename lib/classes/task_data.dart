@@ -1,5 +1,4 @@
 import 'dart:collection';
-import 'dart:io';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/cupertino.dart';
 import 'Task.dart';
@@ -108,10 +107,6 @@ class TaskData extends ChangeNotifier {
     }
     // print(a);
     for (int i = 0; i < a; i++) {
-      // print('\nINSIDE LOOP ');
-      // print('task is ${_prefs.getString('task $i')}');
-      // print('bool is ${_prefs.getBool('boolean $i')}\n\n');
-
       addTask(_prefs.getString('task $i'), _prefs.getBool('boolean $i'));
     }
     // notifyListeners();

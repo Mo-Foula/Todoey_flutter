@@ -4,7 +4,13 @@ import 'package:todoey_flutter/classes/task_data.dart';
 
 class AddTaskScreen extends StatelessWidget {
   String myTask = "";
-  void onAddFunction(String tsk) {}
+
+  void onAddPress(BuildContext context) {
+    if (myTask != "") Provider.of<TaskData>(context).addTask(myTask, false);
+
+    myTask = "";
+    texteditingcontroller.clear();
+  }
 
   final TextEditingController texteditingcontroller = TextEditingController();
 
@@ -24,15 +30,25 @@ class AddTaskScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Text(
-              "Add Task",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 30,
-                color: Colors.lightBlueAccent,
+            FlatButton(
+              onPressed: () {
+                onAddPress(context);
+              },
+              child: Text(
+                "Add Task",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 30,
+                  color: Colors.lightBlueAccent,
+                ),
               ),
             ),
             TextField(
+              enableSuggestions: false,
+              maxLength: 99999,
+              onSubmitted: (a) {
+                onAddPress(context);
+              },
               controller: texteditingcontroller,
               style: TextStyle(fontSize: 20),
               autofocus: true,
@@ -54,11 +70,7 @@ class AddTaskScreen extends StatelessWidget {
               ),
               color: Colors.lightBlueAccent,
               onPressed: () {
-                if (myTask != "")
-                  Provider.of<TaskData>(context).addTask(myTask, false);
-
-                myTask = "";
-                texteditingcontroller.clear();
+                onAddPress(context);
               },
             ),
           ],
