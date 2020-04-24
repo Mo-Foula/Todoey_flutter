@@ -10,6 +10,7 @@ class AddTaskScreen extends StatelessWidget {
 
     myTask = "";
     texteditingcontroller.clear();
+    Navigator.pop(context);
   }
 
   final TextEditingController texteditingcontroller = TextEditingController();
